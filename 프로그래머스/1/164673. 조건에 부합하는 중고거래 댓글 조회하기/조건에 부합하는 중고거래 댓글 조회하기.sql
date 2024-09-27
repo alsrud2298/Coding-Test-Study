@@ -1,0 +1,12 @@
+-- 2022년 10월에 작성된 게시글, 댓글 정보 추출
+SELECT b.TITLE
+    , b.BOARD_ID
+    , r.REPLY_ID
+    , r.WRITER_ID
+    , r.CONTENTS
+    , DATE_FORMAT(r.created_date,'%Y-%m-%d') AS CREATED_DATE
+FROM USED_GOODS_BOARD b
+    JOIN USED_GOODS_REPLY r
+    ON b.board_id = r.board_id
+WHERE b.CREATED_DATE BETWEEN '2022-10-01 00:00:00' AND '2022-10-31 23:59:59'
+ORDER BY CREATED_DATE, TITLE
