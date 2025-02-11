@@ -1,24 +1,17 @@
 def solution(k, tangerine):
-    answer = 0
-    check = 0
-    tangerine.sort()
-    dup = {}
-    for i in tangerine:
-        if i in dup:
-            dup[i] += 1
+    t_dict = {}
+    result = 0
+    
+    for num in tangerine:
+        if num in t_dict:
+            t_dict[num] += 1
         else:
-            dup[i] = 1
+            t_dict[num] = 1
+    sorted_dict = sorted(t_dict.items(), reverse = True, key = lambda x:x[1])
     
-    arr = sorted(dup.items(), key = lambda x: x[1], reverse = True)
-    
-    if arr[0][1] >= k:
-        return 1
-    else:
-        for i in arr:
-            if check < k:
-                check += i[1]
-                answer +=1
-            else:
-                break
-    
-    return answer
+    for item in sorted_dict:
+        if item[1] >= k:
+            return result + 1
+        else:
+            k -= item[1]
+            result += 1
