@@ -1,10 +1,10 @@
 # [level 2] H-Index - 42747 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42747) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42747?language=python3) 
 
 ### 성능 요약
 
-메모리: 4.21 MB, 시간: 0.01 ms
+메모리: 10.1 MB, 시간: 0.22 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 04월 11일 03:00:37
+2025년 02월 25일 14:48:13
 
 ### 문제 설명
 
