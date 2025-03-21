@@ -1,31 +1,18 @@
 def solution(tickets):
-    answer = []
-    # 출발지가 같은 티켓끼리, 도착지 기준 정렬
-    tickets.sort(key = lambda x: (x[0], x[1]))
-    
-    def dfs(t, path):
-        # 티켓을 모두 소진했다면 path 리턴
-        if len(t) == 0:
-            return path
-        
-        now = path[-1]
-        valid_idx = -1
-        
-        # 출발지가 현재 공항인 티켓을 찾아 가장 왼쪽 티켓에서 멈춤
-        for i in range(len(t)):
-            if t[i][0] == now:
-                valid_idx = i
-                break
-        # 티켓이 남아있는데 나아갈 공항이 없는 경우
-        if valid_idx == -1:
-            return []
-    
-        # 출발지가 현재 공항인 티켓을 순회하면서 dfs
-        # 가장 먼저 완성된 루트가 알파벳 상 가장 앞 루트
-        while t[valid_idx][0] == now:
-            nxt_path = dfs(t[:valid_idx] + t[valid_idx + 1:], path + [t[valid_idx][1]])
-            if nxt_path != []:
-                return nxt_path
-            valid_idx += 1
-        return []
-    return dfs(tickets, ["ICN"])
+    for ticket in tickets:
+        ticket.append(0)                                 #visited
+    length = len(tickets)+1                              #경로길이
+    tickets.sort(key = lambda x:x[1])                    #티켓sort
+    t = ["ICN"]                                          #경로저장리스트
+    def dfs(port):                                       #깊이우선탐색
+        for ticket in tickets:               
+            if ticket[0] == port and ticket[2] == 0:     #ticket이 루트에 해당하면서, 방문하지 않은경우
+                t.append(ticket[1])                      #경로 저장
+                ticket[2] = 1                            #visited 체크
+                if length == len(t) or dfs(ticket[1]):   #경로가 꽉찼으면 return t 해주고, 그렇지 않으면 다음탐색
+                    return t
+                ticket[2] = 0                            #탐색했는데 경로 안꽉찼으면 visited = 0으로 수정 후
+                t.pop()                                  #경로 빼내기
+    answer = dfs("ICN")
+
+    return answer
